@@ -10,8 +10,10 @@
     .opacity{
         opacity: 0.3;
     }
-    .hide{
+   
+    #hidden{
         display: none;
+        
     }
 
     header{
@@ -37,7 +39,7 @@
         justify-content: center;
     }
 
-    .yourQuizzes{
+    .yourQuizzesVazio {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -45,7 +47,7 @@
         
 
         height: 181px;
-        width: 100%;
+        width: 1100px;
         max-width: 1051px;
         min-width: 340px;
 
@@ -55,10 +57,9 @@
 
         margin-top: 50px;
         margin-bottom: 50px;
-        margin-right: 200px;
-        margin-left: 200px;
+        
     }
-    .yourQuizzes button{
+    .yourQuizzesVazio button{
         border: 1px;
         border-style: dashed;
         border-color: #EC362D;
@@ -70,8 +71,10 @@
 
         font-size: 21px;
         color: #EC362D;
+
+        background-color: #FFFFFF;
     }
-    .yourQuizzes p {
+    .yourQuizzesVazio p {
         font-size: 20px;
         color: #B9B9B9;
         
@@ -94,17 +97,31 @@
         align-items: center;
         justify-content: center;
     }
+    .yourQuizzes{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
     .sectionH3{
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         width: 340px;
         
         
-        display: flex;
-        
-        
-        
-        
-        
+        display: flex; 
+          
+    }
+    .sectionH3 ion-icon{
+        color: #EC362D;
+        font-size: 30px;
+
+        margin-left: 10px;
+    }
+    .sectionH3 h3{
+        margin-top: 6px;
     }
     
     h3{
@@ -119,6 +136,8 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 15px;
+
+        
     }
     .quizz_box {
         height: 181px;
@@ -131,23 +150,71 @@
 
         
 
-        background-image: url(img/simpsonsTest.png);
+        position: relative;
+        
+    }
+    .gradient{
+        
+        width: 340px;
+        height: 181px;
+        position: absolute;
+        bottom: 3px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+
+        border-radius: 5px;
+
+        
+        
+        
     }
 
     .quizz_box p {
         color: #FFFFFF;
-        
+        position: absolute;
+        z-index: 1;
+
+        bottom: 20px;
+        left: 13px;
+
+        font-size: 19px;
         
         
     }
     .quizz_box div{
        
-        padding: 15px;
+       
     }
-
+    .quizz_box img{
+        height: 181px;
+        width: 340px;
+        
+       
+        border-radius: 5px;
+    }
+    .hide{
+        display: none;
+        
+    }
+    @media (max-width: 1100px) {
+        .yourQuizzesVazio {
+            width: 1100px;
+        }
+    }
     @media (max-width: 1049px) {
         .escondediv{
             display: none;
+        }
+        .sectionH3{
+            margin-bottom: 0;
+        }
+
+        .yourQuizzesVazio {
+            width: 690px;
+        }
+    }
+    @media (max-width: 679px){
+        .yourQuizzesVazio {
+            width: 300px;
         }
     }
 
