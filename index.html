@@ -7,13 +7,14 @@
     <title>Buzz Quizz</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
     <header>
         <h1>BuzzQuizz</h1>
     </header>
     <main>
-        <section class="yourQuizzesVazio  ">
+     <section class="yourQuizzesVazio  ">
             <p >Você não criou nenhum  <br> quizz ainda :(</p>
             <button >Criar Quizz</button>
         </section>
@@ -102,7 +103,110 @@
             </div>
             
         </section>
+
+
+<!--Tela 3-->
+        <!--Tela 1-->
+        <div class="menu hide">
+        <h1 class="titulo-inputs">Comece pelo começo</h1>
+        <div class="caixa-inputs">
+            <input placeholder="Título do seu quizz"></input>
+            <input placeholder="URL da imagem do seu quizz"></input>
+            <input placeholder="Quantidade de perguntas do quizz"></input>
+            <input placeholder="Quantidade de níveis do quizz"></input>
+        </div>
+        <button>Prosseguir pra criar perguntas</button>
+        </div>
+
+
+
+        <!--Tela 2-->
+        <div class="menu hide">
+        <h1 class="titulo-inputs">Crie suas perguntas</h1>
+        <div class="caixa-inputs-pergunta">
+            <div class="pergunta-dividida">
+            <div>
+                <p class="titulo-dentro-input">Pergunta 1</p>
+            </div>
+            <input placeholder="Texto da pergunta">
+            <input placeholder="Cor de fundo da pergunta">
+            </div>
+
+            <div class="pergunta-dividida">
+                <div>
+                <p class="titulo-dentro-input">Resposta correta</p>
+                </div>
+                <input placeholder="Resposta correta">
+                <input placeholder="URL da imagem">
+            </div>
+
+            <div class="pergunta-dividida">
+                <div>
+                <p class="titulo-dentro-input">Respostas incorretas</p>
+                </div>
+                <input placeholder="Resposta incorreta 1">
+                <input placeholder="Resposta incorreta 2">
+                <input placeholder="Resposta incorreta 2">
+                <input placeholder="URL da imagem 2">
+                <input placeholder="Resposta incorreta 3">
+                <input placeholder="URL da imagem 3">
+            </div>
+        </div>
+
+        <div class="edit">Pergunta 2 
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+        <div class="edit">Pergunta 3
+            <ion-icon name="create-outline"></ion-icon></div>
+        <button>Prosseguir pra criar níveis</button>
+        </div>
+
+
+    
+
+        <!--Tela 3-->
+        <div class="menu hide">
+            <h1 class="titulo-inputs">Agora, decida os níveis</h1>
+            <div class="caixa-inputs">
+                <div>
+                <p class="titulo-dentro-input">Nível 1</p>
+                </div>
+                <input placeholder="Título do nível"></input>
+                <input placeholder="% de acerto mínima"></input>
+                <input placeholder="URL da imagem do nível"></input>
+                <div>
+                <textarea placeholder="Descrição do nível"></textarea>
+                </div>
+            </div>
+            
+
+            <div class="edit">Pergunta 2 
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="edit">Pergunta 3
+                <ion-icon name="create-outline"></ion-icon></div>
+            <button>Finalizar Quizz</button>
+        </div>
+
+        <!--Tela 4-->
+        <div class="menu hide">
+        <h1 class="titulo-inputs">Seu Quizz está pronto!</h1>
+        <div class="imagem-comlegenda">
+            <img src="img/simpsonsTest.png"/>
+            <p>O quão Potterhead é você?</p>
+        </div>
+        <button>Acessar Quizz</button>
+        <p class="back">Voltar para home</p>
+        </div>
+
+
+       
+    
+           
+
     </main>
+
+    
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script src="scrypt.js"></script>
 

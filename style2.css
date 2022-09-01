@@ -1,0 +1,220 @@
+.titulo-inputs{
+    margin-top: 71px;
+    margin-bottom: 27px;
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+}
+.caixa-inputs{
+    background-color: #FFFFFF;
+    width: 600px;
+    height: 256px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+input {
+    width: 564px;
+    height: 46px;
+    margin-bottom: 9px;
+    border-radius: 5px;
+    border-color: #D1D1D1;
+    border: 1px;
+}
+
+button {
+    width: 368.86px;
+    height: 54px;
+    background: #EC362D;
+    border-radius: 15px;
+    font-family: 'Roboto';
+    font-size: 21px;
+    color: #FFF5F4;
+    margin-bottom: 20px;
+    margin-top: 27px;
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.caixa-inputs-pergunta{
+    width: 600px;
+    height: 825px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+.titulo-dentro-input{
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+    font-family: 'Roboto';
+}
+
+.pergunta-dividida {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 600px;
+    height: 74px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: 'Roboto';
+    font-weight: 700;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.menu > img {
+    width: 500px;
+    height: 266px;
+    margin-bottom: 80px;
+}
+
+.back{
+    color: #818181;
+    font-family: 'Roboto';
+}
+
+.imagem-comlegenda{
+    position: relative;
+    width: 500px;
+    height: 266px;
+
+}
+
+.imagem-comlegenda img {
+    position: relative;
+    width: 500px;
+    height: 266px;
+    border-radius: 5px;
+}
+
+.imagem-comlegenda p {
+    position: absolute;
+    color: #FFFFFF;
+    font-family: 'Roboto';
+    font-size: 23px;
+    font-weight: 400;
+    bottom: 15px;
+    left: 23px;
+}
+
+.caixa-inputs div {
+    width: 100%;
+    margin-left: 40px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pergunta-dividida div {
+    width: 100%;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.caixa-inputs div:last-child ::placeholder {
+
+    height: 100%;
+}
+
+textarea {
+    width: 564px;
+    height: 46px;
+    margin-bottom: 9px;
+    border-radius: 5px;
+    border-color: #D1D1D1;
+    border: 1px;
+}
+
+
+
+
+
+
+.hide{
+    display: none;
+}
+
+@media (max-width: 600px){
+    .menu{
+        justify-content: center;
+        width: 300px;
+    }
+    .caixa-inputs {
+        width: 300px;
+    }
+    button {
+        width: 320px;
+    }
+    input {
+        width: 300px;
+    }
+    .edit {
+        width: 375px;
+    }
+    .imagem-comlegenda {
+        width: 150px;
+        margin-right: 450px;
+        margin-left: 120px;
+    }
+
+    .imagem-comlegenda img {
+        width: 480px;
+    }
+}
+
+@media (max-width: 750px){
+    .menu{
+        justify-content: center;
+        width: 300px;
+    }
+    .caixa-inputs {
+        width: 300px;
+    }
+    button {
+        width: 320px;
+    }
+    input {
+        width: 300px;
+    }
+    .edit {
+        width: 375px;
+    }
+    .caixa-inputs {
+        height: 439px;
+    }
+    .caixa-inputs div {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+    .caixa-inputs div textarea {
+        height: 177px;
+    }
+}
+
+
