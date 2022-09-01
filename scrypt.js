@@ -47,6 +47,81 @@ const hideTela1 = () => {
     const element = document.querySelector(".yourQuizzes");
     const el1 = element.classList.contains("hide");
     const el2 = elementYourQuiz.classList.contains("hide");
+
+    arrayMenu = document.querySelectorAll(".menu")
+    const elemento = arrayMenu[0];
+    elemento.classList.remove("hide")
+    
+    //console.log(elementMenu);
+    //className
+   //console.log(element.classList.contains("hide"))
+
+   if (el1) {
+
+    elementYourQuiz.classList.add("hide");
+    elementAllQuiz.classList.add("hide");
+   }else if (el2){
+
+    elementAllQuiz.classList.add("hide");
+    element.classList.add("hide");
+   }
+
+    
+}
+
+//esconder na tela 3 o primeiro menu
+
+
+const hideMenu1 = () =>{
+    const element = arrayMenu[0]
+    const element2 = arrayMenu[1]
+
+    element.classList.add("hide");
+    element2.classList.remove("hide");
+
+}
+
+const hideMenu2 = () => {
+    const element = arrayMenu[1];
+    const element2 = arrayMenu[2];
+
+    element.classList.add("hide");
+    element2.classList.remove("hide");
+}
+
+const hideMenu3 = ()  =>{
+    const element = arrayMenu[2];
+    const element2 = arrayMenu[3];
+
+    element.classList.add("hide");
+    element2.classList.remove("hide");
+}
+
+const backHome = () =>{
+    for (let i = 0; i < arrayMenu.length; i++) {
+        const element = arrayMenu[i];
+        if (element.classList.contains("hide")) {
+            
+        }
+        element.classList.add("hide");
+        
+    }
+    const  elementYourQuiz = document.querySelector(".yourQuizzesVazio");
+    const elementAllQuiz = document.querySelector(".allQuizzes");
+    const element = document.querySelector(".yourQuizzes");
+
+    elementYourQuiz.classList.toggle("hide");
+    elementAllQuiz.classList.toggle("hide");
+
+}
+
+const hideTela2 = () => {
+
+    const  elementYourQuiz = document.querySelector(".yourQuizzesVazio");
+    const elementAllQuiz = document.querySelector(".allQuizzes");
+    const element = document.querySelector(".yourQuizzes");
+    const el1 = element.classList.contains("hide");
+    const el2 = elementYourQuiz.classList.contains("hide");
     //className
    //console.log(element.classList.contains("hide"))
 
@@ -65,7 +140,7 @@ const hideTela1 = () => {
 
 const getData2 = (element) => {
 
-    hideTela1();
+    hideTela2();
     elementId =  element.id;
     //console.log(element.id)
     const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${elementId}`)
@@ -152,7 +227,7 @@ const clickAnswer = (element) => {
 const calcula = (num1,num2) =>{
     const x = num1/num2;
     const  percent = x*100;
-    result = percent;
+    result =   Math.round(percent) ;
 }
 
 //funcao para verificar se as respostas estão marcadas
@@ -202,6 +277,8 @@ let maxPercent;
 let valueArray = [];
 let rigthAnswers;
 let result;
+
+let arrayMenu;
 
 //Chamada de Funções 
 
