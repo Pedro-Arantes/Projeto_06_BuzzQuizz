@@ -165,7 +165,9 @@ const treatData = (promise) => {
     //pegar elementos do html para as funçoes
     const divQuizTitle = document.querySelector(".titleQuizz");
     const modelo = `<img src="${imageQuiz}" alt="">
-    <div>${titleQuiz}</div>`
+                                    <p>${titleQuiz}</p>
+                                    <div class="gradient2"></div>`
+                                    
     divQuizTitle.innerHTML = modelo;
 
     const divAnswer = document.querySelector(".boxQuestions");
@@ -239,7 +241,8 @@ const clickAnswer = (element) => {
     const isCorrect = element.id ;
     const pai = element.parentNode;
     const filhos = pai.childNodes
-    //console.log(filhos);
+    const p = element.querySelector(`${element.classList[0]} :nth-child(2)`);
+    console.log(p);
     const eMarcado = pai.querySelectorAll(".marcado")
     
     if (eMarcado.length === 0) {
@@ -254,6 +257,9 @@ const clickAnswer = (element) => {
             }
         }
     }else{
+       /*
+       //Caso pudesse desmarcar 
+       else{
         for (let i = 0; i < eMarcado.length; i++) {
             const elemento = eMarcado[i];
             elemento.classList.remove("marcado")
@@ -268,6 +274,9 @@ const clickAnswer = (element) => {
         }
         element.classList.remove("opacity")
         element.classList.add("marcado")
+        
+    } 
+    */
         
     }
     
