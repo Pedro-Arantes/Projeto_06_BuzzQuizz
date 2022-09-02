@@ -165,7 +165,8 @@ const treatData = (promise) => {
     //pegar elementos do html para as funçoes
     const divQuizTitle = document.querySelector(".titleQuizz");
     const modelo = `<img src="${imageQuiz}" alt="">
-    <div>${titleQuiz}</div>`
+    <p>${titleQuiz}</p>
+    <div class="gradient2"></div>`
     divQuizTitle.innerHTML = modelo;
 
     const divAnswer = document.querySelector(".boxQuestions");

@@ -12,7 +12,6 @@
     /*background-image: url("./img/hogwarts.jpg");*/
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: 60%;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
@@ -26,7 +25,7 @@
     height: 227px;
 }
 
-.titleQuizz div {
+.titleQuizz p {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -34,6 +33,7 @@
     line-height: 45.7px;
     color: #FFFFFF;
     position: absolute;
+    z-index: 1;
 }
 
 .boxQuestions {
