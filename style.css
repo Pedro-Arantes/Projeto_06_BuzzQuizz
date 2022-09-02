@@ -188,6 +188,9 @@
        
         border-radius: 5px;
     }
+    .boxQuestion{
+        margin-bottom: 100px;
+    }
     .hide{
         display: none;
         
@@ -195,6 +198,9 @@
     @media (max-width: 1100px) {
         .yourQuizzesVazio {
             width: 1100px;
+        }
+        .boxQuestion{
+            margin-left: 70px;
         }
     }
     @media (max-width: 1049px) {

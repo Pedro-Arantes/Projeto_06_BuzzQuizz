@@ -124,15 +124,19 @@ const hideTela2 = () => {
     const el2 = elementYourQuiz.classList.contains("hide");
     //className
    //console.log(element.classList.contains("hide"))
+   const elementPageTwo = document.querySelector(".pageTwo")
+   
 
    if (el1) {
 
     elementYourQuiz.classList.add("hide");
     elementAllQuiz.classList.add("hide");
+    elementPageTwo.classList.remove("hide")
    }else if (el2){
 
     elementAllQuiz.classList.add("hide");
     element.classList.add("hide");
+    elementPageTwo.classList.remove("hide")
    }
 
     
@@ -159,15 +163,19 @@ const treatData = (promise) => {
     //chamar funcao para definir os niveis
     levelDefine(levelsArray);
     //pegar elementos do html para as funçoes
-    //const divQuizTitle = document.querySelector("");
-    //const divAnswer = document.querySelector("");
+    const divQuizTitle = document.querySelector(".titleQuizz");
+    const modelo = `<img src="${imageQuiz}" alt="">
+    <div>${titleQuiz}</div>`
+    divQuizTitle.innerHTML = modelo;
+
+    const divAnswer = document.querySelector(".boxQuestions");
    //chamar uma função para percorrer e add no html
 
    //funcao que adiciona o titulo da pergunta
    //addQuizTitle(QuestArray,divQuizTitle);
 
    //funcao que adiciona as respostas
-   //addAnswer(QuestArray,divAnswer);
+   addAnswer(QuestArray,divAnswer);
 
     console.log(promessa);
     console.log(titleQuiz);
@@ -179,10 +187,19 @@ const addAnswer= (array,element,) =>{
     for (let i = 0; i < array.length; i++) {
         const titulo = array[i].title;
         const arrayAnswer = array[i].answers;
-        
-        percorreArray(arrayAnswer,elemento);
-        const modelo = `<div>${titulo}<div>`;
+        const newClass = `num${i}`
+        const modelo = `<div class = "boxQuestion"><div class="titleQuestions">
+        <h2>${titulo}</h2>
+        </div>
+        <div class="boxAnswers  ${newClass}">
+                    
+        </div>
+        </div>`;
         element.innerHTML+= modelo;
+        const boxAnswers = document.querySelector(`.num${i}`)
+        percorreArray(arrayAnswer,boxAnswers);
+        
+        
         
     }
 }
@@ -193,10 +210,13 @@ const percorreArray = (array,element) =>{
         const img = array[i].image;
         const text = array[i].text;
 
-        const modelo = `<div>Ola mundo ${text}  imagem ${img}  id = "${correct}"<div>`
+        const modelo = `<div onclick="clickAnswer(this)"  id="${correct}"class="quizzAnswers">
+        <img src="${img}" alt="Imagem respostas">
+        <p>${text}</p>
+        </div>`
 
         element.innerHTML+= modelo;
-        
+        console.log(array)
     }
 }
 
@@ -214,12 +234,53 @@ const addQuizTitle= (array,element) =>{
 //funcao para fazer algo ao clicar nas respostas
 const clickAnswer = (element) => {
     const isCorrect = element.id ;
-    if (isCorrect === "true") {
-        rigthAnswers++;
+    const pai = element.parentNode;
+    const filhos = pai.childNodes
+    //console.log(filhos);
+    const eMarcado = pai.querySelectorAll(".marcado")
+    
+    if (eMarcado.length === 0) {
+        element.classList.add("marcado")
+        for (let i = 1; i < filhos.length; i++) {
+            const element = filhos[i];
+            if (element.classList.contains("marcado")) {
+                
+            }else{
+                element.classList.add("opacity")
+                
+            }
+        }
     }else{
+        for (let i = 0; i < eMarcado.length; i++) {
+            const element = eMarcado[i];
+            element.classList.remove("marcado")
+            element.classList.add("opacity")
+            if (element.id === "true") {
+                
+            }else{
 
+            }
+            
+            
+        }
+        element.classList.remove("opacity")
+        element.classList.add("marcado")
+        
     }
     
+    
+    if (isCorrect === "true") {
+        rigthAnswers++;
+        if (rigthAnswers>questNum) {
+            rigthAnswers = questNum;
+        }
+    }else{
+        rigthAnswers--;
+        if (rigthAnswers<0) {
+            rigthAnswers = 0;
+        }
+    }
+    console.log(rigthAnswers)
 }
 
 //calculo
@@ -233,8 +294,8 @@ const calcula = (num1,num2) =>{
 //funcao para verificar se as respostas estão marcadas
 
 const allChecked = () => {
-    const elementArray = document.querySelectorAll("marcado")
-
+    const elementArray = document.querySelectorAll(".marcado")
+    //console.log()
     if (elementArray.length === questNum) {
         calcula(rigthAnswers,questNum);
         quizResult();
@@ -255,12 +316,37 @@ const levelDefine = (array) =>{
 //funcao para exibir o final da tela 2
 
 const quizResult = () => {
+    let  x = 0
     for (let i = 0; i < valueArray.length; i++) {
-        const element = array[i];
-        if (result > x) {
+        const element = valueArray[i];
+        console.log(result);
+        console.log(element);
         
+        if (result > element) {
+            x++
+       }else{
+            x--
+            if (x <0) {
+                x = 0;
+            }
+            
+       }
+
+       if (result === 0) {
+        alert(`Você acertou ${result}%!, logo voce é Nivel ${i}`)
+        clearInterval(interval);
+        break
+        } else if(x === valueArray.length) {
+            alert(`Você acertou ${result}%!, logo voce é Nivel ${i+1}`)
+            clearInterval(interval);
+            break
+        }else if (valueArray.length -1 === i ){
+            alert(`Você acertou ${result}%!, logo voce é Nivel ${x}`)
         }
+        
     }
+    
+    clearInterval(interval);
     
 }
 //Declaração de variáveis
@@ -275,7 +361,7 @@ let questNum;
 
 let maxPercent;
 let valueArray = [];
-let rigthAnswers;
+let rigthAnswers = 0;
 let result;
 
 let arrayMenu;
@@ -283,3 +369,4 @@ let arrayMenu;
 //Chamada de Funções 
 
 getData();
+const interval = setInterval(allChecked,1000);

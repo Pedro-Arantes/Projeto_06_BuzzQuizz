@@ -9,7 +9,7 @@
 .titleQuizz {
     width: 100%;
     height: 227px;
-    background-image: url("./img/hogwarts.jpg");
+    /*background-image: url("./img/hogwarts.jpg");*/
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 60%;
@@ -17,6 +17,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
+}
+
+.titleQuizz img{
+    width: 100%;
+    height: 227px;
 }
 
 .titleQuizz div {
@@ -26,6 +33,7 @@
     font-size: 39px;
     line-height: 45.7px;
     color: #FFFFFF;
+    position: absolute;
 }
 
 .boxQuestions {
