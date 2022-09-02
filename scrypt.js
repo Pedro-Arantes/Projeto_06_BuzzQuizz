@@ -2,7 +2,7 @@
 
 
 
-//Declaração de Funções
+//Declaração de Funções---------------------------------------------------------------------------------
 
  const insertQuizzes = (promise) => {
     const dataArray = promise.data;
@@ -177,16 +177,19 @@ const treatData = (promise) => {
    //funcao que adiciona as respostas
    addAnswer(QuestArray,divAnswer);
 
-    console.log(promessa);
+    //console.log(promessa);
     console.log(titleQuiz);
-    console.log(levelsArray);
+   // console.log(levelsArray);
 }
 
 const addAnswer= (array,element,) =>{
     //const elemento = document.querySelector("");
     for (let i = 0; i < array.length; i++) {
         const titulo = array[i].title;
-        const arrayAnswer = array[i].answers;
+        let array1=  array[i].answers;
+        console.log(array1);
+        const arrayAnswer = array1.sort( () =>  Math.random() - 0.5); 
+        console.log(arrayAnswer);
         const newClass = `num${i}`
         const modelo = `<div class = "boxQuestion"><div class="titleQuestions">
         <h2>${titulo}</h2>
@@ -216,7 +219,7 @@ const percorreArray = (array,element) =>{
         </div>`
 
         element.innerHTML+= modelo;
-        console.log(array)
+        //console.log(array)
     }
 }
 
@@ -252,11 +255,11 @@ const clickAnswer = (element) => {
         }
     }else{
         for (let i = 0; i < eMarcado.length; i++) {
-            const element = eMarcado[i];
-            element.classList.remove("marcado")
-            element.classList.add("opacity")
-            if (element.id === "true") {
-                
+            const elemento = eMarcado[i];
+            elemento.classList.remove("marcado")
+            elemento.classList.add("opacity")
+            if (elemento.id === "true" &&  element.id === "true") {
+                rigthAnswers--;
             }else{
 
             }
@@ -349,7 +352,42 @@ const quizResult = () => {
     clearInterval(interval);
     
 }
-//Declaração de variáveis
+//embaralha arrays
+const embaralhador = (array) =>{
+        for (let i = array.length - 1; i ; i--) {
+        
+        const randomIndice = Math.floor(Math.random() * (i + 1));
+        const elemento = array[i - 1];
+        array[randomIndice] = elemento;
+        
+        }
+        // Retornando array com aleatoriedade
+        return array;
+
+        
+}
+const testeMap = (array) => {
+    
+    let  novoArray = mapa(array)
+    console.log(novoArray);
+    return embaralhador(novoArray);
+}
+const naoFazNada = (algo) => algo
+
+ 
+
+const mapa = (array) =>{
+    let novo = [];
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        
+        novo.push(element);
+    }
+    console.log(novo);
+    return novo;
+}
+
+//Declaração de variáveis Globais-------------------------------------------------------------
 
 let elementId;
 let imageQuiz;
@@ -366,7 +404,7 @@ let result;
 
 let arrayMenu;
 
-//Chamada de Funções 
+//Chamada de Funções------------------------------------------------
 
 getData();
 const interval = setInterval(allChecked,1000);
