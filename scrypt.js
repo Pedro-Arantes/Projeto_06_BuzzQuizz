@@ -53,6 +53,7 @@ const hideTela1 = () => {
     const elemento = arrayMenu1[0];
     elemento.classList.remove("hide")
     
+    
     //console.log(elementMenu);
     //className
    //console.log(element.classList.contains("hide"))
@@ -386,7 +387,7 @@ const quizResult = () => {
         <p onclick="backHome2()" class="back">Voltar pra home</p>`
         divAnswer.innerHTML+=modelo;
         const scroll = document.querySelector(".container")
-        scroll.scrollIntoView();
+        setTimeout(scrollEle,2000,scroll);
         clearInterval(interval);
         break
         } else if(x === valueArray.length) {
@@ -407,7 +408,7 @@ const quizResult = () => {
             <p onclick="backHome2()" class="back">Voltar pra home</p>`
             divAnswer.innerHTML+=modelo;
             const scroll = document.querySelector(".container")
-            scroll.scrollIntoView();
+            setTimeout(scrollEle,2000,scroll);
             clearInterval(interval);
             break
         }else if (valueArray.length -1 === i ){
@@ -427,7 +428,7 @@ const quizResult = () => {
             <p onclick="backHome2()" class="back">Voltar pra home</p>`
             divAnswer.innerHTML+=modelo;
             const scroll = document.querySelector(".container")
-            scroll.scrollIntoView();
+            setTimeout(scrollEle,2000,scroll);
             clearInterval(interval);
             break
         }
@@ -475,6 +476,7 @@ const backHome2 = () =>{
     elementPage2.classList.toggle("hide");
     elementYourQuiz.classList.toggle("hide");
     elementAllQuiz.classList.toggle("hide");
+    elementYourQuiz.scrollIntoView();
     
 
 }
