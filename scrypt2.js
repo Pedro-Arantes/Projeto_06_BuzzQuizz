@@ -498,7 +498,7 @@ let arrayMenu = document.querySelectorAll(".menu")
 
 
 
-
+/*
  function enviarQuiz() {
     const parte1 = document.querySelector('.pd0');
     const title = parte1.children[0];
@@ -524,7 +524,7 @@ let arrayMenu = document.querySelectorAll(".menu")
 
     /* criar pergunta 2 e 3 no html */
     /* criar parametros dos inputs no html */
-   
+   /*
     const parte5 = document.querySelector('.pd4');
     const tituloNivel = parte5.children[1];
     const acertoMinimo = parte5.children[2];
@@ -532,7 +532,7 @@ let arrayMenu = document.querySelectorAll(".menu")
     const descrNivel = parte5.children[4];
 
     /* criar nível 2 e 3 no html */
-    
+    /*
     const objeto = {
         title: title.value,
         image: url.value,
