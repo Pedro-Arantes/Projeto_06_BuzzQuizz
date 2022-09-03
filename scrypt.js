@@ -40,6 +40,7 @@ const getData = () => {
 }
 const algo = (element) => console.log(element);
 
+//função esconde a tela 1 
 const hideTela1 = () => {
 
     const  elementYourQuiz = document.querySelector(".yourQuizzesVazio");
@@ -97,6 +98,7 @@ const hideMenu3 = ()  =>{
     element2.classList.remove("hide");
 }
 
+//volta pra tela 1 
 const backHome = () =>{
     for (let i = 0; i < arrayMenu.length; i++) {
         const element = arrayMenu[i];
@@ -114,7 +116,7 @@ const backHome = () =>{
     elementAllQuiz.classList.toggle("hide");
 
 }
-
+//--------------------------------------------------------------------------------
 const hideTela2 = () => {
 
     const  elementYourQuiz = document.querySelector(".yourQuizzesVazio");
@@ -349,6 +351,7 @@ const quizResult = () => {
         clearInterval(interval);
         break
         } else if(x === valueArray.length) {
+            console.log(i+1)
             alert(`Você acertou ${result}%!, logo voce é Nivel ${i+1}`)
             clearInterval(interval);
             break
@@ -381,20 +384,10 @@ const testeMap = (array) => {
     console.log(novoArray);
     return embaralhador(novoArray);
 }
-const naoFazNada = (algo) => algo
+
 
  
 
-const mapa = (array) =>{
-    let novo = [];
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i];
-        
-        novo.push(element);
-    }
-    console.log(novo);
-    return novo;
-}
 
 //Declaração de variáveis Globais-------------------------------------------------------------
 
