@@ -49,8 +49,8 @@ const hideTela1 = () => {
     const el1 = element.classList.contains("hide");
     const el2 = elementYourQuiz.classList.contains("hide");
 
-    arrayMenu = document.querySelectorAll(".menu")
-    const elemento = arrayMenu[0];
+    arrayMenu1 = document.querySelectorAll(".menu")
+    const elemento = arrayMenu1[0];
     elemento.classList.remove("hide")
     
     //console.log(elementMenu);
@@ -73,9 +73,9 @@ const hideTela1 = () => {
 //esconder na tela 3 o primeiro menu
 
 
-const hideMenu1 = () =>{
-    const element = arrayMenu[0]
-    const element2 = arrayMenu[1]
+/*const hideMenu1 = () =>{
+    const element = arrayMenu1[0]
+    const element2 = arrayMenu1[1]
 
     element.classList.add("hide");
     element2.classList.remove("hide");
@@ -83,16 +83,16 @@ const hideMenu1 = () =>{
 }
 
 const hideMenu2 = () => {
-    const element = arrayMenu[1];
-    const element2 = arrayMenu[2];
+    const element = arrayMenu1[1];
+    const element2 = arrayMenu1[2];
 
     element.classList.add("hide");
     element2.classList.remove("hide");
 }
 
 const hideMenu3 = ()  =>{
-    const element = arrayMenu[2];
-    const element2 = arrayMenu[3];
+    const element = arrayMenu1[2];
+    const element2 = arrayMenu1[3];
 
     element.classList.add("hide");
     element2.classList.remove("hide");
@@ -100,8 +100,8 @@ const hideMenu3 = ()  =>{
 
 //volta pra tela 1 
 const backHome = () =>{
-    for (let i = 0; i < arrayMenu.length; i++) {
-        const element = arrayMenu[i];
+    for (let i = 0; i < arrayMenu1.length; i++) {
+        const element = arrayMenu1[i];
         if (element.classList.contains("hide")) {
             
         }
@@ -116,6 +116,7 @@ const backHome = () =>{
     elementAllQuiz.classList.toggle("hide");
 
 }
+*/
 //--------------------------------------------------------------------------------
 const hideTela2 = () => {
 
@@ -158,7 +159,7 @@ const treatData = (promise) => {
     imageQuiz = promessa.image;
     titleQuiz = promessa.title;
     //adicionar o titulo do quiz aqui
-    const QuestArray =  promessa.questions;
+    QuestArray =  promessa.questions;
     levelsArray = promessa.levels;
     questNum = QuestArray.length;
 
@@ -169,6 +170,7 @@ const treatData = (promise) => {
     const modelo = `<img src="${imageQuiz}" alt="">
     <p>${titleQuiz}</p>
     <div class="gradient2"></div>`
+
     divQuizTitle.innerHTML = modelo;
 
     const divAnswer = document.querySelector(".boxQuestions");
@@ -179,7 +181,7 @@ const treatData = (promise) => {
 
    //funcao que adiciona as respostas
    addAnswer(QuestArray,divAnswer);
-
+    divQuizTitle.scrollIntoView();
     //console.log(promessa);
     console.log(titleQuiz);
    // console.log(levelsArray);
@@ -187,6 +189,7 @@ const treatData = (promise) => {
 
 const addAnswer= (array,element,) =>{
     //const elemento = document.querySelector("");
+    element.innerHTML= "";
     for (let i = 0; i < array.length; i++) {
         const titulo = array[i].title;
         let array1=  array[i].answers;
@@ -201,6 +204,7 @@ const addAnswer= (array,element,) =>{
                     
         </div>
         </div>`;
+        
         element.innerHTML+= modelo;
         const boxAnswers = document.querySelector(`.num${i}`)
         percorreArray(arrayAnswer,boxAnswers);
@@ -241,11 +245,21 @@ const addQuizTitle= (array,element) =>{
 const clickAnswer = (element) => {
     const isCorrect = element.id ;
     const pai = element.parentNode;
+    const pai2 = pai.parentNode;
     const filhos = pai.childNodes
-    const p = element.querySelector(`${element.classList[0]} :nth-child(2)`);
+    
+    
+    const p = element.querySelector(`p`);
     console.log(p);
     const eMarcado = pai.querySelectorAll(".marcado")
-    
+    if (pai2.nextSibling !== null) {
+        const sib = pai2.nextSibling;
+        const sibling = sib.querySelector(".titleQuestions");
+        setTimeout(scrollEle,2000,sibling)
+        
+        
+    }
+
     if (eMarcado.length === 0) {
         element.classList.add("marcado")
         for (let i = 1; i < filhos.length; i++) {
@@ -280,20 +294,28 @@ const clickAnswer = (element) => {
     */
         
     }
-    
+    const eMarcado2 = document.querySelectorAll(".marcado")
     
     if (isCorrect === "true") {
         rigthAnswers++;
+        p.classList.add("acerto")
         if (rigthAnswers>questNum) {
             rigthAnswers = questNum;
         }
     }else{
-        rigthAnswers--;
+        if (rigthAnswers === 1 &&  eMarcado2.length === 2) {
+            console.log("to aqui")
+        }else if (rigthAnswers > 1){
+            
+        }
+        
+        p.classList.add("erro")
         if (rigthAnswers<0) {
             rigthAnswers = 0;
         }
     }
     console.log(rigthAnswers)
+    
 }
 
 //calculo
@@ -332,6 +354,8 @@ const quizResult = () => {
     let  x = 0
     for (let i = 0; i < valueArray.length; i++) {
         const element = valueArray[i];
+        const divAnswer = document.querySelector(".boxQuestions");
+        
         console.log(result);
         console.log(element);
         
@@ -346,16 +370,66 @@ const quizResult = () => {
        }
 
        if (result === 0) {
-        alert(`Você acertou ${result}%!, logo voce é Nivel ${i}`)
+        
+        const modelo = `<div class="container">
+        <div class="container2">${result}% de acerto: ${levelsArray[i].title}</div>
+        <div class="fotolegenda">
+            <div class="container3">
+                <img src="${levelsArray[i].image}"/>
+            </div>
+            <div class="container4">
+                <p>${levelsArray[i].text}</p>
+            </div>
+        </div>
+        </div>
+        <button onclick="reiniciaQuizz()">Reiniciar Quizz</button>
+        <p onclick="backHome2()" class="back">Voltar pra home</p>`
+        divAnswer.innerHTML+=modelo;
+        const scroll = document.querySelector(".container")
+        scroll.scrollIntoView();
         clearInterval(interval);
         break
         } else if(x === valueArray.length) {
             console.log(i+1)
-            alert(`Você acertou ${result}%!, logo voce é Nivel ${i+1}`)
+            
+            const modelo = `<div class="container">
+            <div class="container2">${result}% de acerto: ${levelsArray[i].title}</div>
+            <div class="fotolegenda">
+            <div class="container3">
+                <img src="${levelsArray[i].image}"/>
+            </div>
+            <div class="container4">
+                <p>${levelsArray[i].text}</p>
+            </div>
+            </div>
+            </div>
+            <button onclick="reiniciaQuizz()">Reiniciar Quizz</button>
+            <p onclick="backHome2()" class="back">Voltar pra home</p>`
+            divAnswer.innerHTML+=modelo;
+            const scroll = document.querySelector(".container")
+            scroll.scrollIntoView();
             clearInterval(interval);
             break
         }else if (valueArray.length -1 === i ){
-            alert(`Você acertou ${result}%!, logo voce é Nivel ${x}`)
+           
+            const modelo = `<div class="container">
+            <div class="container2">${result}% de acerto: ${levelsArray[x].title}</div>
+            <div class="fotolegenda">
+            <div class="container3">
+                <img src="${levelsArray[x].image}"/>
+            </div>
+            <div class="container4">
+                <p>${levelsArray[x].text}</p>
+            </div>
+            </div>
+            </div>
+            <button onclick="reiniciaQuizz()">Reiniciar Quizz</button>
+            <p onclick="backHome2()" class="back">Voltar pra home</p>`
+            divAnswer.innerHTML+=modelo;
+            const scroll = document.querySelector(".container")
+            scroll.scrollIntoView();
+            clearInterval(interval);
+            break
         }
         
     }
@@ -385,9 +459,29 @@ const testeMap = (array) => {
 }
 
 
+const reiniciaQuizz= () => {
+    const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${elementId}`)
+    promessa.then(treatData);
+    interval = setInterval(allChecked,1000);
+    rigthAnswers = 0;
+}
  
+const backHome2 = () =>{
+    const elementPage2 = document.querySelector(".pageTwo");
+    const  elementYourQuiz = document.querySelector(".yourQuizzesVazio");
+    const elementAllQuiz = document.querySelector(".allQuizzes");
+    const element = document.querySelector(".yourQuizzes");
 
+    elementPage2.classList.toggle("hide");
+    elementYourQuiz.classList.toggle("hide");
+    elementAllQuiz.classList.toggle("hide");
+    
 
+}
+
+const scrollEle = (element) =>{
+    element.scrollIntoView();
+}
 //Declaração de variáveis Globais-------------------------------------------------------------
 
 let elementId;
@@ -403,9 +497,10 @@ let valueArray = [];
 let rigthAnswers = 0;
 let result;
 
-let arrayMenu;
+let arrayMenu1;
+let QuestArray;
 
 //Chamada de Funções------------------------------------------------
 
 getData();
-const interval = setInterval(allChecked,1000);
+let interval = setInterval(allChecked,1000);

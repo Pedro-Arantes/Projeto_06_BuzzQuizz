@@ -30,7 +30,7 @@
         font-weight: 700;
         position: fixed;
         top: 0;
-        left: 0;
+        
         z-index: 2;
 
         
@@ -195,6 +195,9 @@
     }
     .boxQuestion{
         margin-bottom: 100px;
+    }
+    .black{
+        color: #000000;
     }
     .acerto{
         color: green;
