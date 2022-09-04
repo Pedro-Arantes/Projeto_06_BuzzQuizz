@@ -127,7 +127,7 @@ button {
     width: 100%;
     margin-left: 40px;
     margin-bottom: 5px;
-    display: flex;
+    
     justify-content: flex-start;
 }
 
@@ -250,6 +250,9 @@ textarea {
     .imagem-comlegenda img {
         width: 480px;
     }
+    .hide{
+        display: none;
+    }
 }
 
 @media (max-width: 750px){
@@ -278,6 +281,9 @@ textarea {
     }
     .caixa-inputs div textarea {
         height: 177px;
+    }
+    .hide{
+        display: none;
     }
 }
 

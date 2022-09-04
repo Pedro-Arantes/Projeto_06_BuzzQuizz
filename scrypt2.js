@@ -89,7 +89,7 @@ const inserePerguntas = () => {
         const modelo = `<div class="caixa-inputs-pergunta ${hide} perg${i+1}">
         <div class="pergunta-dividida ">
         <div>
-            <p class="titulo-dentro-input">Pergunta 1</p>
+            <p class="titulo-dentro-input">Pergunta ${i+1}</p>
         </div>
         <input class="txt${i+1}" placeholder="Texto da pergunta">
         <input class="cor${i+1}" placeholder="Cor de fundo da pergunta">
@@ -119,10 +119,12 @@ const inserePerguntas = () => {
         if (i === 0) {
             menu2.innerHTML+= modelo;
         }else{
-            const modelo2 = `<div class=" caixa-inputs-pergunta  edit">Pergunta ${i+1}
+            const modelo2 = `<div class=" caixa-inputs-pergunta  edit">
+            <p>Pergunta ${i+1}</p>
             <ion-icon onclick = "abrePergunta(this)"  name="create-outline"></ion-icon>
+            ${modelo}
             </div>
-            ${modelo}`;
+            `;
             menu2.innerHTML+= modelo2;
         }
 
@@ -134,17 +136,7 @@ const inserePerguntas = () => {
 }
 
 const insereLevels = ()=>{
-    const modelo = `<div class="caixa-inputs ">
-    <div>
-        <p class="titulo-dentro-input">Nível 1</p>
-    </div>
-    <input placeholder="Título do nível"></input>
-    <input placeholder="% de acerto mínima"></input>
-    <input placeholder="URL da imagem do nível"></input>
-    <div>
-        <textarea placeholder="Descrição do nível"></textarea>
-    </div>
-    </div>`;
+    
     
     const menu3 = document.querySelector("#menu3")
     const modelo1 = `<h1 class="titulo-inputs">Agora, decida os níveis</h1>`
@@ -153,8 +145,27 @@ const insereLevels = ()=>{
 
     
     for (let i = 0; i < qntNvValue; i++) {
-        const modelo2 = `<div class="caixa-inputs  edit">Nível ${i+1}
-        <ion-icon onclick = "abreNível()"  name="create-outline"></ion-icon>
+        let hide = ""
+
+        if (i>0) {
+            hide = "hide"
+        }
+
+        const modelo = `<div class="caixa-inputs ${hide} ">
+        <div>
+            <p class="titulo-dentro-input">Nível ${i+1}</p>
+        </div>
+        <input placeholder="Título do nível"></input>
+        <input placeholder="% de acerto mínima"></input>
+        <input placeholder="URL da imagem do nível"></input>
+        <div>
+            <textarea placeholder="Descrição do nível"></textarea>
+        </div>
+        </div>`;        
+        const modelo2 = `<div class="caixa-inputs  edit">
+        <p>Nível ${i+1}</p>
+        <ion-icon onclick = "abrePergunta(this)"  name="create-outline"></ion-icon>
+        ${modelo}
         </div>`;
         if (i === 0) {
             menu3.innerHTML+= modelo;
@@ -189,6 +200,16 @@ const capturaPerguntas = ()  =>{
 
 }
 
+const abrePergunta = (element) =>{
+    const pai = element.parentNode;
+    const sib = pai.querySelector("div");
+    const p = pai.querySelector("p");
+    p.classList.toggle("hide")
+    //element.classList.toggle("hide");
+    sib.classList.toggle("hide");
+    pai.classList.toggle("edit");
+    
+}
 
 
 //Declaração de Variáveis Globais----------------------------------
