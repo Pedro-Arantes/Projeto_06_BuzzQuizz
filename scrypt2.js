@@ -93,11 +93,11 @@ const inserePerguntas = () => {
     <input placeholder="URL da imagem 3">
     </div>`;
 
-    
 
     for (let i = 0; i < qntPergValue; i++) {
-        const modelo2 = `<div class=" caixa-inputs-pergunta  edit">Pergunta ${i+1}
-        <ion-icon onclick = "abrePergunta()"  name="create-outline"></ion-icon>
+        const modelo2 = `
+        <div class=" caixa-inputs-pergunta  edit">Pergunta ${i+1}
+            <ion-icon onclick = "abrePergunta(this)"  name="create-outline"></ion-icon>
         </div>`;
         if (i === 0) {
             caixaPerguntas.innerHTML+= modelo;
@@ -110,6 +110,41 @@ const inserePerguntas = () => {
     }
     const modeloBtn = `<button onclick="hideMenu2 ()">Prosseguir pra criar níveis</button>`
     menu2.innerHTML+= modeloBtn;
+}
+
+function abrePergunta(elemento) {
+    const pai = elemento.parentNode;
+  
+    const modelo = `
+    <input placeholder="Texto da pergunta">
+    <input placeholder="Cor de fundo da pergunta">
+    </div>
+
+    <div class="pergunta-dividida ">
+    <div>
+        <p class="titulo-dentro-input">Resposta correta</p>
+    </div>
+    <input placeholder="Resposta correta">
+    <input placeholder="URL da imagem">
+    </div>
+
+    <div class="pergunta-dividida ">
+    <div>
+        <p class="titulo-dentro-input">Respostas incorretas</p>
+    </div>
+    <input placeholder="Resposta incorreta 1">
+    <input placeholder="URL da imagem 1">
+    <input placeholder="Resposta incorreta 2">
+    <input placeholder="URL da imagem 2">
+    <input placeholder="Resposta incorreta 3">
+    <input placeholder="URL da imagem 3">
+    </div>`;
+
+
+    pai.innerHTML += modelo;
+     
+   
+        
 }
 
 //Declaração de Variáveis Globais----------------------------------
@@ -614,7 +649,7 @@ let qntNvValue;
     const tituloNivel = parte5.children[1];
     const acertoMinimo = parte5.children[2];
     const urlNivel = parte5.children[3];
-    const descrNivel = parte5.children[4];
+    const descrNivel = parte5.children[4]; */
 
     /* criar nível 2 e 3 no html */
 <<<<<<< HEAD
@@ -654,3 +689,4 @@ let qntNvValue;
 
     
 
+*/
