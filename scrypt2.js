@@ -45,7 +45,8 @@ const hideMenu3 = ()  =>{
 
     element.classList.add("hide");
     element2.classList.remove("hide");
-
+    capturaLevels();
+    postQuizz();
     insereFinal();
 }
 
@@ -155,11 +156,11 @@ const insereLevels = ()=>{
         <div>
             <p class="titulo-dentro-input">Nível ${i+1}</p>
         </div>
-        <input placeholder="Título do nível"></input>
-        <input placeholder="% de acerto mínima"></input>
-        <input placeholder="URL da imagem do nível"></input>
+        <input id="tituloNv${i+1}" placeholder="Título do nível"></input>
+        <input id="acertNv${i+1}" placeholder="% de acerto mínima"></input>
+        <input id="urlNv${i+1}" placeholder="URL da imagem do nível"></input>
         <div>
-            <textarea placeholder="Descrição do nível"></textarea>
+            <textarea id="txtNv${i+1}" placeholder="Descrição do nível"></textarea>
         </div>
         </div>`;        
         const modelo2 = `<div class="caixa-inputs  edit2">
@@ -206,7 +207,7 @@ const capturaPerguntas = ()  =>{
         const color = document.querySelector(`#cor${i+1}`).value;
         const obj = {
             title:  `${txt}`,
-            Color: `${color}`,
+            color: `${color}`,
             answers: arrayAnswers
         }
         questArray.push(obj); 
@@ -238,6 +239,27 @@ const capturaAnswers = (num) =>{
     return array;
 }
 
+const capturaLevels = () =>{
+    for (let i = 0; i < qntNvValue; i++) {
+
+        
+        //console.log(arrayAnswers);
+        const title = document.querySelector(`#tituloNv${i+1}`).value;
+        const value = document.querySelector(`#acertNv${i+1}`).value;
+        const img = document.querySelector(`#urlNv${i+1}`).value;
+        const txt = document.querySelector(`#txtNv${i+1}`).value;
+        
+        const obj = {
+            title:  `${title}`,
+            image: `${img}`,
+            text:  `${txt}`,
+            minValue: value
+        }
+        levelArray.push(obj); 
+    }
+    console.log( levelArray);
+}
+
 const abrePergunta = (element) =>{
     const pai = element.parentNode;
     const sib = pai.querySelector("div");
@@ -247,6 +269,24 @@ const abrePergunta = (element) =>{
     sib.classList.toggle("hide");
     pai.classList.toggle("edit");
     
+}
+
+const postQuizz = () =>{
+    const obj ={
+        title: `${tituloValue}`,
+	    image:  `${imgValue}` ,
+        questions: questArray,
+        levels: levelArray
+    }
+    console.log(obj);
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', obj);
+    requisicao.then(postado)
+};
+
+const postado = (obj) =>{
+    const data = obj.data;
+    id = data.id;
+    console.log(id);
 }
 
 
@@ -259,6 +299,8 @@ let imgValue;
 let qntPergValue;
 let qntNvValue;
 let questArray = [];
+let levelArray = [];
+let id;
 
 
 
