@@ -91,28 +91,28 @@ const inserePerguntas = () => {
         <div>
             <p class="titulo-dentro-input">Pergunta ${i+1}</p>
         </div>
-        <input class="txt${i+1}" placeholder="Texto da pergunta">
-        <input class="cor${i+1}" placeholder="Cor de fundo da pergunta">
+        <input id="txt${i+1}" placeholder="Texto da pergunta">
+        <input id="cor${i+1}" placeholder="Cor de fundo da pergunta">
         </div>
 
         <div class="pergunta-dividida ">
         <div>
             <p class="titulo-dentro-input">Resposta correta</p>
         </div>
-        <input placeholder="Resposta correta">
-        <input placeholder="URL da imagem">
+        <input id="correct${i+1}" placeholder="Resposta correta">
+        <input id="correctImg${i+1}"placeholder="URL da imagem">
         </div>
 
         <div class="pergunta-dividida ">
         <div>
             <p class="titulo-dentro-input">Respostas incorretas</p>
         </div>
-        <input placeholder="Resposta incorreta 1">
-        <input placeholder="URL da imagem 1">
-        <input placeholder="Resposta incorreta 2">
-        <input placeholder="URL da imagem 2">
-        <input placeholder="Resposta incorreta 3">
-        <input placeholder="URL da imagem 3">
+        <input id="erro1Perg${i+1}" placeholder="Resposta incorreta 1">
+        <input id="erroImg1Perg${i+1}" placeholder="URL da imagem 1">
+        <input id="erro2Perg${i+1}" placeholder="Resposta incorreta 2">
+        <input id="erroImg2Perg${i+1}" placeholder="URL da imagem 2">
+        <input  id="erro3Perg${i+1}"placeholder="Resposta incorreta 3">
+        <input  id="erroImg3Perg${i+1}"placeholder="URL da imagem 3">
         </div>
         </div>`;
         
@@ -162,7 +162,7 @@ const insereLevels = ()=>{
             <textarea placeholder="Descrição do nível"></textarea>
         </div>
         </div>`;        
-        const modelo2 = `<div class="caixa-inputs  edit">
+        const modelo2 = `<div class="caixa-inputs  edit2">
         <p>Nível ${i+1}</p>
         <ion-icon onclick = "abrePergunta(this)"  name="create-outline"></ion-icon>
         ${modelo}
@@ -198,6 +198,44 @@ const insereFinal = () => {
 
 const capturaPerguntas = ()  =>{
 
+    for (let i = 0; i < qntPergValue; i++) {
+
+        const arrayAnswers  = capturaAnswers(i+1);
+        //console.log(arrayAnswers);
+        const txt = document.querySelector(`#txt${i+1}`).value;
+        const color = document.querySelector(`#cor${i+1}`).value;
+        const obj = {
+            title:  `${txt}`,
+            Color: `${color}`,
+            answers: arrayAnswers
+        }
+        questArray.push(obj); 
+    }
+    console.log( questArray);
+    
+}
+
+const capturaAnswers = (num) =>{
+    const array = [];
+    const txt = document.querySelector(`#correct${num}`).value;
+    const img = document.querySelector(`#correctImg${num}`).value;
+    const obj = {text:`${txt}`,
+    image:`${img}`,
+    isCorrectAnswer: true
+    }
+    array.push(obj);
+    for (let i = 0; i < 3; i++) {
+        const txt = document.querySelector(`#erro${i+1}Perg${num}`).value;
+        const img = document.querySelector(`#erroImg${i+1}Perg${num}`).value;
+        const obj = {text:`${txt}`,
+        image:`${img}`,
+        isCorrectAnswer: false
+        }
+        array.push(obj);
+        
+    }
+    //console.log(array);
+    return array;
 }
 
 const abrePergunta = (element) =>{
@@ -220,6 +258,7 @@ let tituloValue;
 let imgValue;
 let qntPergValue;
 let qntNvValue;
+let questArray = [];
 
 
 
