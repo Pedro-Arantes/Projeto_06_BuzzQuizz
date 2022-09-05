@@ -76,23 +76,18 @@ const hideMenu3 = ()  =>{
 }
 
 const backHome = () =>{
-    for (let i = 0; i < arrayMenu.length; i++) {
-        const element = arrayMenu[i];
-        if (element.classList.contains("hide")) {
-            
-        }
-        element.classList.add("hide");
-        
-    }
+    
     const  elementYourQuiz = document.querySelector(".yourQuizzesVazio");
     const elementAllQuiz = document.querySelector(".allQuizzes");
-    const element = document.querySelector(".yourQuizzes");
+    const element = document.querySelector("#menu4");
 
     elementYourQuiz.classList.toggle("hide");
     elementAllQuiz.classList.toggle("hide");
+    element.classList.toggle("hide")
 
-    limpatela()
-
+    getData();
+    
+    rigthAnswers = 0;
 }
 
 const inserePerguntas = () => {
@@ -457,7 +452,7 @@ const tela2Criado = () =>{
     
     //console.log(element.id)
     const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`)
-    promessa.then(treatData2)
+    promessa.then(treatData)
 }
 
 const hideTela3_2 = () =>{

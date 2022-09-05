@@ -7,22 +7,46 @@
  const insertQuizzes = (promise) => {
     const dataArray = promise.data;
     const element = document.querySelector(".allQuizzes .quizzes_boxes")
+    const id = localStorage.getItem("id");
+    const num = parseInt(id);
+    const modelo  = `<div class="sectionH3">
+    <h3>Todos os Quizzes</h3>
+    </div>
+    <div class="sectionH3"></div>
+    <div class="sectionH3 escondediv"></div>`
+    const array = [];
     //console.log(element.innerHTML);
-
+    element.innerHTML = modelo;
     for (let i = 0; i < dataArray.length; i++) {
         let quizzImage = dataArray[i].image;
         let quizzTitle = dataArray[i].title;
         let quizzId = dataArray[i].id;
-        const divQuizzBox = `<div onclick="getData2(this)"  id="${quizzId}"class="quizz_box">
-        <div>
+        if (quizzId === num) {
+            const obj = {
+                image: quizzImage,
+                title:    quizzTitle,
+                id:  quizzId
+            }
+            array.push(obj);
+        }else{
+            const divQuizzBox = `<div onclick="getData2(this)"  id="${quizzId}"class="quizz_box">
+            <div>
             <img src="${quizzImage}" alt="">
             <p>${quizzTitle}</p>
             <div class="gradient"></div>
-        </div>
-        </div>`
-        element.innerHTML  += divQuizzBox;
+            </div>
+            </div>`
+            element.innerHTML  += divQuizzBox;
+        }
+        
         //console.log(element.innerHTML);
     }
+    if (array.length <1) {
+        
+    }else{
+        insertYourQuiz(id,array);
+    }
+    
     
     //let quizzQuestions = x[0].questions ;
     //let Quizztitle = x[0].title;
@@ -33,6 +57,7 @@
 };
 
 const getData = () => {
+
 
     const promessa = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
     promessa.then(insertQuizzes)
@@ -190,6 +215,7 @@ const treatData = (promise) => {
     //console.log(promessa);
     console.log(titleQuiz);
    // console.log(levelsArray);
+   interval = setInterval(allChecked,1000);
 }
 
 const addAnswer= (array,element,) =>{
@@ -483,12 +509,46 @@ const backHome2 = () =>{
     elementAllQuiz.classList.toggle("hide");
     elementYourQuiz.scrollIntoView();
     
-    interval = setInterval(allChecked,1000);
+    getData();
+    
     rigthAnswers = 0;
 }
 
 const scrollEle = (element) =>{
     element.scrollIntoView();
+}
+
+const insertYourQuiz  = (id,array) =>{
+    
+    const element = document.querySelector(".yourQuizzes")
+    const vazio = document.querySelector(".yourQuizzesVazio")
+
+    vazio.classList.add("hide")
+    element.classList.remove("hide")
+
+    const modelo = `<div class="sectionH3 seus">
+    <h3>Seus Quizzes</h3>
+    <ion-icon onclick="hideTela1()" name="add-circle"></ion-icon>
+    </div>
+    <div class="sectionH3"></div>
+
+    <div class="sectionH3 escondediv"></div>`
+    element.innerHTML = modelo;
+
+    for (let i = 0; i < array.length; i++) {
+        
+        let quizzImage = array[i].image;
+        let quizzTitle = array[i].title;
+        let quizzId = array[i].id;
+        const divQuizzBox = `<div onclick="getData2(this)"  id="${quizzId}"class="quizz_box">
+            <div>
+            <img src="${quizzImage}" alt="">
+            <p>${quizzTitle}</p>
+            <div class="gradient"></div>
+            </div>
+            </div>`
+        element.innerHTML  += divQuizzBox;
+    }
 }
 //Declaração de variáveis Globais-------------------------------------------------------------
 
@@ -511,4 +571,4 @@ let QuestArray;
 //Chamada de Funções------------------------------------------------
 
 getData();
-let interval = setInterval(allChecked,1000);
+let interval ;
