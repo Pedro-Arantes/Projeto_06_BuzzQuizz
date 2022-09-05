@@ -7,7 +7,16 @@
  const insertQuizzes = (promise) => {
     const dataArray = promise.data;
     const element = document.querySelector(".allQuizzes .quizzes_boxes")
+    let contador = 0;
     localStore();
+    if (arrayIdLocal.length <= 0) {
+        
+    }else{
+        const vazio = document.querySelector(".yourQuizzesVazio")
+        const your = document.querySelector(".yourQuizzes")
+        vazio.classList.add("hide");
+        your.classList.remove("hide");
+    }
     
     const modelo  = `<div class="sectionH3">
     <h3>Todos os Quizzes</h3>
@@ -27,8 +36,9 @@
             const element = arrayIdLocal[i];
             const num = parseInt(element);
             //console.log(element);
-           // console.log(quizzId);
-            if (quizzId === num) {
+            //console.log(num);
+            console.log(quizzId === num)
+            if (quizzId == num) {
                 const obj = {
                     image: quizzImage,
                     title:    quizzTitle,
@@ -36,6 +46,7 @@
                 }
                 array.push(obj);
                 condition = false;
+                contador++;
                 console.log(condition);
             }
                
@@ -55,6 +66,13 @@
         
         
         //console.log(element.innerHTML);
+    }
+
+    if (contador === 0) {
+        const vazio = document.querySelector(".yourQuizzesVazio")
+        const your = document.querySelector(".yourQuizzes")
+        vazio.classList.remove("hide");
+        your.classList.add("hide");
     }
     if (array.length <1) {
         
@@ -238,12 +256,13 @@ const addAnswer= (array,element,) =>{
     element.innerHTML= "";
     for (let i = 0; i < array.length; i++) {
         const titulo = array[i].title;
+        const color = array[i].color;
         let array1=  array[i].answers;
         console.log(array1);
         const arrayAnswer = array1.sort( () =>  Math.random() - 0.5); 
         console.log(arrayAnswer);
         const newClass = `num${i}`
-        const modelo = `<div class = "boxQuestion"><div class="titleQuestions">
+        const modelo = `<div  class = "boxQuestion"><div style="background-color:${color}" class="titleQuestions">
         <h2>${titulo}</h2>
         </div>
         <div class="boxAnswers  ${newClass}">

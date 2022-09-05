@@ -316,16 +316,19 @@ const postQuizz = () =>{
     
     console.log(obj);
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', obj);
-    requisicao.then(postado)
+    requisicao.then(postado,obj)
 };
 
-const postado = (obj) =>{
+const postado = (obj,objeto) =>{
     const data = obj.data;
     id = data.id;
     console.log(id);
     const arrayTitulos = JSON.parse(localStorage.getItem(`titulos`)) ;
+    //const arrayObjetos = JSON.parse(localStorage.getItem(`objetos`)) ;
     arrayTitulos.push(tituloValue);
+    //arrayObjetos.push(objeto)
     localStorage.setItem("titulos", `${JSON.stringify(arrayTitulos)}`);
+    //localStorage.setItem("objetos", `${JSON.stringify(arrayObjetos)}`);
 
     localStorage.setItem(`${tituloValue}`, `${id}`);
     //countGlobal++;
