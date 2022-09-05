@@ -5,7 +5,7 @@
 const hideMenu1 = () =>{
     const element = arrayMenu[0]
     const element2 = arrayMenu[1]
-
+    
     
 
     const tituloQuizz = document.querySelector("#tela3Titulo")
@@ -30,7 +30,7 @@ const hideMenu1 = () =>{
     }else if (imgValue.search("https://" )=== -1){
         alert("A imagem deve ser passada em url");
     }else{
-        
+        alert("Se quiser um campo de answers vazio use null!");
         element.classList.add("hide");
         element2.classList.remove("hide");
         inserePerguntas();
