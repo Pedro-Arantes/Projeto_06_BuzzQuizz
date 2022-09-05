@@ -157,9 +157,13 @@ const getData2 = (element) => {
 
 const treatData = (promise) => {
     const promessa = promise.data;
+    imageQuiz = "";
+    titleQuiz = "";
     imageQuiz = promessa.image;
     titleQuiz = promessa.title;
     //adicionar o titulo do quiz aqui
+    QuestArray =  "";
+    levelsArray = "";
     QuestArray =  promessa.questions;
     levelsArray = promessa.levels;
     questNum = QuestArray.length;
@@ -342,6 +346,7 @@ const allChecked = () => {
 //funcao para definir os niveis 
 
 const levelDefine = (array) =>{
+    valueArray = [];
     for (let i = 0; i < array.length; i++) {
         const element = array[i].minValue;
         valueArray.push(element);
@@ -478,7 +483,8 @@ const backHome2 = () =>{
     elementAllQuiz.classList.toggle("hide");
     elementYourQuiz.scrollIntoView();
     
-
+    interval = setInterval(allChecked,1000);
+    rigthAnswers = 0;
 }
 
 const scrollEle = (element) =>{

@@ -213,11 +213,11 @@ const insereLevels = ()=>{
 
 const insereFinal = () => {
 
-    const modelo = `<div class="imagem-comlegenda">
+    const modelo = `<div onclick = "tela2Criado()" class="imagem-comlegenda">
     <img src="${imgValue}" />
     <p>${tituloValue}</p>
     </div>
-    <button>Acessar Quizz</button>
+    <button onclick = "tela2Criado()">Acessar Quizz</button>
     <p class="back" onclick="backHome()">Voltar para home</p>`
     const modelo1 = `<h1 class="titulo-inputs">Seu Quizz está pronto!</h1>`
     const menu4 = document.querySelector("#menu4")
@@ -425,25 +425,130 @@ const verifyLevels = () =>{
     if (verifyValue(array)) {
         boolean = true
     }else{
-        alert("É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0% ")
+       
         boolean = false
     }
     return boolean;
 }
 
 const verifyValue = (array) =>{
-    let counter;
+    let counter = 0;
+    let boolean;
     for (let i = 0; i < array.length; i++) {
         const element = array[i];
-        if (element === 0) {
+        
+        if (element == 0) {
             counter++
         }
     }
+    console.log(counter)
     if (counter === 1) {
-        return true
+        boolean = true
+        console.log(counter)
     } else{
-        return false
+        boolean = false
+        
     }
+    return boolean;
+}
+
+const tela2Criado = () =>{
+    hideTela3_2();
+    
+    //console.log(element.id)
+    const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`)
+    promessa.then(treatData2)
+}
+
+const hideTela3_2 = () =>{
+    const  menu4 = document.querySelector("#menu4");
+    const elementPageTwo = document.querySelector(".pageTwo")
+
+    menu4.classList.add("hide");
+    
+    elementPageTwo.classList.remove("hide")
+
+};
+
+const treatData2 = (promise) =>{
+    const promessa = promise.data;
+    imageQuiz2 = promessa.image;
+    titleQuiz2 = promessa.title;
+    //adicionar o titulo do quiz aqui
+    QuestArray2 =  promessa.questions;
+    levelsArray2= promessa.levels;
+    questNum2 = QuestArray2.length;
+
+    //chamar funcao para definir os niveis
+    levelDefine2(levelsArray2);
+    //pegar elementos do html para as funçoes
+    const divQuizTitle = document.querySelector(".titleQuizz");
+    const modelo = `<img src="${imageQuiz2}" alt="">
+    <p>${titleQuiz2}</p>
+    <div class="gradient2"></div>`
+
+    divQuizTitle.innerHTML = modelo;
+
+    const divAnswer = document.querySelector(".boxQuestions");
+
+
+   //funcao que adiciona as respostas
+   addAnswer2(QuestArray2,divAnswer);
+    divQuizTitle.scrollIntoView();
+    
+   //console.log(titleQuiz);
+   
+}
+
+const addAnswer2= (array,element,) =>{
+    //const elemento = document.querySelector("");
+    element.innerHTML= "";
+    for (let i = 0; i < array.length; i++) {
+        const titulo = array[i].title;
+        let array1=  array[i].answers;
+        console.log(array1);
+        const arrayAnswer = array1.sort( () =>  Math.random() - 0.5); 
+        console.log(arrayAnswer);
+        const newClass = `num${i}`
+        const modelo = `<div class = "boxQuestion"><div class="titleQuestions">
+        <h2>${titulo}</h2>
+        </div>
+        <div class="boxAnswers  ${newClass}">
+                    
+        </div>
+        </div>`;
+        
+        element.innerHTML+= modelo;
+        const boxAnswers = document.querySelector(`.num${i}`)
+        percorreArray2(arrayAnswer,boxAnswers);
+        
+        
+        
+    }
+}
+
+const percorreArray2 = (array,element) =>{
+    for (let i = 0; i < array.length; i++) {
+        const correct = array[i].isCorrectAnswer;
+        const img = array[i].image;
+        const text = array[i].text;
+
+        const modelo = `<div onclick="clickAnswer(this)"  id="${correct}"class="quizzAnswers">
+        <img src="${img}" alt="Imagem respostas">
+        <p>${text}</p>
+        </div>`
+
+        element.innerHTML+= modelo;
+        //console.log(array)
+    }
+}
+
+const levelDefine2 = (array) =>{
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i].minValue;
+        valueArray.push(element);
+    }
+    console.log(valueArray);
 }
 
 
@@ -460,7 +565,12 @@ let levelArray = [];
 let id;
 let countGlobal = 0;
 
-
+//var globais para renderizar a tela2
+let imageQuiz2;
+let titleQuiz2;
+let QuestArray2;
+let levelsArray2;
+let questNum2;
 
 
 
