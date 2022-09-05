@@ -6,8 +6,7 @@ const hideMenu1 = () =>{
     const element = arrayMenu[0]
     const element2 = arrayMenu[1]
 
-    element.classList.add("hide");
-    element2.classList.remove("hide");
+    
 
     const tituloQuizz = document.querySelector("#tela3Titulo")
     tituloValue = tituloQuizz.value;
@@ -21,9 +20,23 @@ const hideMenu1 = () =>{
     const qntNv = document.querySelector("#qntNv")
     qntNvValue = qntNv.value;
     qntNv.value = "";
-    
 
-    inserePerguntas();
+    if (qntPergValue < 3) {
+        alert("O quizz deve ter 3 perguntas no minimo");
+    }else if(qntNvValue<2){
+        alert("O quizz deve ter 2 níveis no minimo");
+    }else if (tituloValue.length <20 || tituloValue.length > 65){
+        alert("O titulo do quizz deve ter caracteres entre 20 e 65");
+    }else if (imgValue.search("https://" )=== -1){
+        alert("A imagem deve ser passada em url");
+    }else{
+        
+        element.classList.add("hide");
+        element2.classList.remove("hide");
+        inserePerguntas();
+    }
+
+    
 
 }
 
@@ -31,23 +44,35 @@ const hideMenu2 = () => {
     const element = arrayMenu[1];
     const element2 = arrayMenu[2];
 
-    element.classList.add("hide");
-    element2.classList.remove("hide");
+    
 
     
-    capturaPerguntas();
-    insereLevels();
+    const boolean = capturaPerguntas();
+    if (boolean) {
+        element.classList.add("hide");
+        element2.classList.remove("hide");
+        insereLevels();
+    }else{
+        alert("tem algo errado no preenchimento")
+    }
+    
 }
 
 const hideMenu3 = ()  =>{
     const element = arrayMenu[2];
     const element2 = arrayMenu[3];
 
-    element.classList.add("hide");
-    element2.classList.remove("hide");
-    capturaLevels();
-    postQuizz();
-    insereFinal();
+    
+    const boolean  = capturaLevels();
+    if (boolean) {
+        element.classList.add("hide");
+        element2.classList.remove("hide");
+        postQuizz();
+        insereFinal();
+    }else{
+        alert("tem algo errado no preenchimento");
+    }
+    
 }
 
 const backHome = () =>{
@@ -198,21 +223,26 @@ const insereFinal = () => {
 }
 
 const capturaPerguntas = ()  =>{
+    if (verificaPergunt()) {
+        for (let i = 0; i < qntPergValue; i++) {
 
-    for (let i = 0; i < qntPergValue; i++) {
-
-        const arrayAnswers  = capturaAnswers(i+1);
-        //console.log(arrayAnswers);
-        const txt = document.querySelector(`#txt${i+1}`).value;
-        const color = document.querySelector(`#cor${i+1}`).value;
-        const obj = {
-            title:  `${txt}`,
-            color: `${color}`,
-            answers: arrayAnswers
+            const arrayAnswers  = capturaAnswers(i+1);
+            //console.log(arrayAnswers);
+            const txt = document.querySelector(`#txt${i+1}`).value;
+            const color = document.querySelector(`#cor${i+1}`).value;
+            const obj = {
+                title:  `${txt}`,
+                color: `${color}`,
+                answers: arrayAnswers
+            }
+            questArray.push(obj); 
         }
-        questArray.push(obj); 
+        return true
+    }else{
+        return false
     }
-    console.log( questArray);
+    
+    //console.log( questArray);
     
 }
 
@@ -240,24 +270,31 @@ const capturaAnswers = (num) =>{
 }
 
 const capturaLevels = () =>{
-    for (let i = 0; i < qntNvValue; i++) {
+
+    if (verifyLevels()) {
+        for (let i = 0; i < qntNvValue; i++) {
 
         
-        //console.log(arrayAnswers);
-        const title = document.querySelector(`#tituloNv${i+1}`).value;
-        const value = document.querySelector(`#acertNv${i+1}`).value;
-        const img = document.querySelector(`#urlNv${i+1}`).value;
-        const txt = document.querySelector(`#txtNv${i+1}`).value;
-        
-        const obj = {
-            title:  `${title}`,
-            image: `${img}`,
-            text:  `${txt}`,
-            minValue: value
+            //console.log(arrayAnswers);
+            const title = document.querySelector(`#tituloNv${i+1}`).value;
+            const value = document.querySelector(`#acertNv${i+1}`).value;
+            const img = document.querySelector(`#urlNv${i+1}`).value;
+            const txt = document.querySelector(`#txtNv${i+1}`).value;
+            
+            const obj = {
+                title:  `${title}`,
+                image: `${img}`,
+                text:  `${txt}`,
+                minValue: value
+            }
+            levelArray.push(obj); 
         }
-        levelArray.push(obj); 
+        return true
+    }else{
+        return false
     }
-    console.log( levelArray);
+    
+    
 }
 
 const abrePergunta = (element) =>{
@@ -287,6 +324,123 @@ const postado = (obj) =>{
     const data = obj.data;
     id = data.id;
     console.log(id);
+
+    localStorage.setItem(`id`, `${id}`);
+    //countGlobal++;
+}
+
+const verificaPergunt = () =>{
+    let boolean;
+    for (let i = 0; i < qntPergValue; i++) {
+
+        const txt = document.querySelector(`#txt${i+1}`).value;
+        const color = document.querySelector(`#cor${i+1}`).value;
+        const verify  = verifyAnswers(i+1);
+        
+        if (verify) {
+            if (txt.length < 20) {
+                //console.log("deu ruim no txt")
+                boolean = false;
+                break
+            } else if (color.length !== 7 || color.search("#") === -1){
+                //console.log("deu ruim na color")
+                boolean = false;
+                break
+                
+            }else{
+                boolean = true;
+            }
+        } else{
+            boolean = false;
+        }
+        //console.log(arrayAnswers);
+        
+        //console.log("to no array verify")
+        
+       
+    }
+    return boolean;
+}
+
+const verifyAnswers = (num) =>{
+    let boolean;
+    const txt = document.querySelector(`#correct${num}`).value;
+    const img = document.querySelector(`#correctImg${num}`).value;
+    if (txt.length < 1) {
+        console.log("erro no titulo da pergunta");
+        boolean = false;
+    }else if(img.search("https://" )=== -1){
+        console.log("erro na img");
+        boolean = false;
+    } else{
+        for (let i = 0; i < 3; i++) {
+            const txt = document.querySelector(`#erro${i+1}Perg${num}`).value;
+            const img = document.querySelector(`#erroImg${i+1}Perg${num}`).value;
+            if (txt.length < 1) {
+                console.log("erro no titulo da pergunta");
+                boolean = false;
+                break
+            }else if(img.search("https://" )=== -1){
+                console.log("erro na img");
+                boolean = false;
+                break
+            }else{
+                boolean = true;
+            }
+        }
+    }
+    return boolean;
+}
+
+const verifyLevels = () =>{
+    let boolean ;
+    let array =[];
+    for (let i = 0; i < qntNvValue; i++) {
+
+        
+        //console.log(arrayAnswers);
+        const title = document.querySelector(`#tituloNv${i+1}`).value;
+        const value = document.querySelector(`#acertNv${i+1}`).value;
+        const img = document.querySelector(`#urlNv${i+1}`).value;
+        const txt = document.querySelector(`#txtNv${i+1}`).value;
+        array.push(value);
+        
+        if (title.length <10) {
+            boolean = false;
+            break
+        }else if(value < 0 && value >100){
+            boolean = false;
+            break
+        }else if (img.search("https://" )=== -1){
+            boolean = false ;
+            break
+        }else if (txt.length <30){
+            boolean = false ;
+            break
+        }
+    }
+    if (verifyValue(array)) {
+        boolean = true
+    }else{
+        alert("É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0% ")
+        boolean = false
+    }
+    return boolean;
+}
+
+const verifyValue = (array) =>{
+    let counter;
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        if (element === 0) {
+            counter++
+        }
+    }
+    if (counter === 1) {
+        return true
+    } else{
+        return false
+    }
 }
 
 
@@ -301,6 +455,7 @@ let qntNvValue;
 let questArray = [];
 let levelArray = [];
 let id;
+let countGlobal = 0;
 
 
 
