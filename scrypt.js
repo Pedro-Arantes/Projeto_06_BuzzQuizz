@@ -337,6 +337,7 @@ const clickAnswer = (element) => {
             }
         }
     }else{
+
        /*
        //Caso pudesse desmarcar 
        else{
@@ -361,24 +362,34 @@ const clickAnswer = (element) => {
     }
     const eMarcado2 = document.querySelectorAll(".marcado")
     
-    if (isCorrect === "true") {
-        rigthAnswers++;
-        p.classList.add("acerto")
-        if (rigthAnswers>questNum) {
-            rigthAnswers = questNum;
-        }
-    }else{
-        if (rigthAnswers === 1 &&  eMarcado2.length === 2) {
-            console.log("to aqui")
-        }else if (rigthAnswers > 1){
-            
-        }
+    if (element.classList.contains("firstClick")) {
         
-        p.classList.add("erro")
-        if (rigthAnswers<0) {
-            rigthAnswers = 0;
+    }else{
+        if (isCorrect === "true") {
+            rigthAnswers++;
+            p.classList.add("acerto")
+            if (rigthAnswers>questNum) {
+                rigthAnswers = questNum;
+            }
+        }else{
+            if (rigthAnswers === 1 &&  eMarcado2.length === 2) {
+                console.log("to aqui")
+            }else if (rigthAnswers > 1){
+                
+            }
+            
+            p.classList.add("erro")
+            if (rigthAnswers<0) {
+                rigthAnswers = 0;
+            }
         }
+        element.classList.add("firstClick")
     }
+        
+        
+        
+    
+    
     console.log(rigthAnswers)
     
 }
@@ -625,6 +636,7 @@ let arrayMenu1;
 let QuestArray;
 
 let arrayIdLocal = [];
+let counter = 0;
 
 //Chamada de Funções------------------------------------------------
 
