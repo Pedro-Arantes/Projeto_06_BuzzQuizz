@@ -108,11 +108,12 @@ const inserePerguntas = () => {
 
     for (let i = 0; i < qntPergValue; i++) {
         let hide = ""
-
+        let colocaId = ``
         if (i>0) {
             hide = "hide"
+            colocaId = `id = "inputBox"`
         }
-        const modelo = `<div class="caixa-inputs-pergunta ${hide} perg${i+1}">
+        const modelo = `<div ${colocaId} class="caixa-inputs-pergunta ${hide} perg${i+1}">
         <div class="pergunta-dividida ">
         <div>
             <p class="titulo-dentro-input">Pergunta ${i+1}</p>
@@ -164,7 +165,7 @@ const inserePerguntas = () => {
 const insereLevels = ()=>{
     
     
-    const menu3 = document.querySelector("#menu3")
+    const menu3 = document.querySelector(".divLevels")
     const modelo1 = `<h1 class="titulo-inputs">Agora, decida os níveis</h1>`
     menu3.innerHTML = modelo1;
     
@@ -172,12 +173,14 @@ const insereLevels = ()=>{
     
     for (let i = 0; i < qntNvValue; i++) {
         let hide = ""
+        let colocaId;
 
         if (i>0) {
             hide = "hide"
+            colocaId = `id = "inputBox"`;
         }
 
-        const modelo = `<div class="caixa-inputs ${hide} ">
+        const modelo = `<div ${colocaId} class="caixa-inputs ${hide} ">
         <div>
             <p class="titulo-dentro-input">Nível ${i+1}</p>
         </div>
