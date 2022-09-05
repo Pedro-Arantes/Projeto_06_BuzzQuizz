@@ -248,19 +248,36 @@ const capturaAnswers = (num) =>{
     const array = [];
     const txt = document.querySelector(`#correct${num}`).value;
     const img = document.querySelector(`#correctImg${num}`).value;
+
+    
+
     const obj = {text:`${txt}`,
     image:`${img}`,
     isCorrectAnswer: true
     }
     array.push(obj);
     for (let i = 0; i < 3; i++) {
+        let contador = 0
         const txt = document.querySelector(`#erro${i+1}Perg${num}`).value;
         const img = document.querySelector(`#erroImg${i+1}Perg${num}`).value;
-        const obj = {text:`${txt}`,
-        image:`${img}`,
-        isCorrectAnswer: false
+        if ((txt === "null"  || txt === "vazio")&& contador <2) {
+            contador++
+        }else if(contador === 2){
+            const obj = {text:`${txt}`,
+            image:`${img}`,
+            isCorrectAnswer: false
+            }
+            array.push(obj);
+            console.log("teste contador")
+        }else{
+            const obj = {text:`${txt}`,
+            image:`${img}`,
+            isCorrectAnswer: false
+            }
+            array.push(obj);
+            console.log("teste contador")
         }
-        array.push(obj);
+        
         
     }
     //console.log(array);
