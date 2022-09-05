@@ -87,6 +87,9 @@
 
         text-align: center;
     }
+    .yourQuizzes{
+        
+    }
     .allQuizzes{
         display: flex;
         align-items: center;
@@ -103,10 +106,14 @@
         justify-content: center;
     }
     .yourQuizzes{
+        
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        gap: 15px;
 
         margin-top: 50px;
         margin-bottom: 50px;

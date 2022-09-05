@@ -7,8 +7,8 @@
  const insertQuizzes = (promise) => {
     const dataArray = promise.data;
     const element = document.querySelector(".allQuizzes .quizzes_boxes")
-    const id = localStorage.getItem("id");
-    const num = parseInt(id);
+    localStore();
+    
     const modelo  = `<div class="sectionH3">
     <h3>Todos os Quizzes</h3>
     </div>
@@ -21,14 +21,27 @@
         let quizzImage = dataArray[i].image;
         let quizzTitle = dataArray[i].title;
         let quizzId = dataArray[i].id;
-        if (quizzId === num) {
-            const obj = {
-                image: quizzImage,
-                title:    quizzTitle,
-                id:  quizzId
+        let condition = true;
+        
+        for (let i = 0; i < arrayIdLocal.length; i++) {
+            const element = arrayIdLocal[i];
+            const num = parseInt(element);
+            //console.log(element);
+           // console.log(quizzId);
+            if (quizzId === num) {
+                const obj = {
+                    image: quizzImage,
+                    title:    quizzTitle,
+                    id:  quizzId
+                }
+                array.push(obj);
+                condition = false;
+                console.log(condition);
             }
-            array.push(obj);
-        }else{
+               
+            
+        }
+        if (condition) {
             const divQuizzBox = `<div onclick="getData2(this)"  id="${quizzId}"class="quizz_box">
             <div>
             <img src="${quizzImage}" alt="">
@@ -38,13 +51,15 @@
             </div>`
             element.innerHTML  += divQuizzBox;
         }
+       
+        
         
         //console.log(element.innerHTML);
     }
     if (array.length <1) {
         
     }else{
-        insertYourQuiz(id,array);
+        insertYourQuiz(array);
     }
     
     
@@ -173,7 +188,7 @@ const hideTela2 = () => {
 
 const getData2 = (element) => {
 
-    hideTela2();
+    hideTela2(); 
     elementId =  element.id;
     //console.log(element.id)
     const promessa = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${elementId}`)
@@ -517,11 +532,33 @@ const backHome2 = () =>{
 const scrollEle = (element) =>{
     element.scrollIntoView();
 }
+const localStore = () =>{
 
-const insertYourQuiz  = (id,array) =>{
+    const arrayTitulos = JSON.parse(localStorage.getItem(`titulos`)) ;
+    console.log(arrayTitulos);
+    arrayIdLocal = [];
+    if (arrayTitulos === null) {
+        
+    }else{
+        for (let i = 0; i < arrayTitulos.length; i++) {
+        
+            const id = localStorage.getItem(`${arrayTitulos[i]}`);
+            arrayIdLocal.push(id);
+            
+        }
+    }
+    console.log(arrayIdLocal);
+    
+   
+    
+   
+}
+
+const insertYourQuiz  = (array) =>{
     
     const element = document.querySelector(".yourQuizzes")
     const vazio = document.querySelector(".yourQuizzesVazio")
+    
 
     vazio.classList.add("hide")
     element.classList.remove("hide")
@@ -567,6 +604,8 @@ let result;
 
 let arrayMenu1;
 let QuestArray;
+
+let arrayIdLocal = [];
 
 //Chamada de Funções------------------------------------------------
 

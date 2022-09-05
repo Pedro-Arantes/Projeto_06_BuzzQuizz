@@ -313,6 +313,7 @@ const postQuizz = () =>{
         questions: questArray,
         levels: levelArray
     }
+    
     console.log(obj);
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', obj);
     requisicao.then(postado)
@@ -322,8 +323,11 @@ const postado = (obj) =>{
     const data = obj.data;
     id = data.id;
     console.log(id);
+    const arrayTitulos = JSON.parse(localStorage.getItem(`titulos`)) ;
+    arrayTitulos.push(tituloValue);
+    localStorage.setItem("titulos", `${JSON.stringify(arrayTitulos)}`);
 
-    localStorage.setItem(`id`, `${id}`);
+    localStorage.setItem(`${tituloValue}`, `${id}`);
     //countGlobal++;
 }
 
@@ -559,6 +563,9 @@ let questArray = [];
 let levelArray = [];
 let id;
 let countGlobal = 0;
+
+
+let arrayTitulos = [];
 
 //var globais para renderizar a tela2
 let imageQuiz2;
